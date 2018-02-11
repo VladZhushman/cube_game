@@ -3,13 +3,13 @@ import React, {Component} from 'react';
 class Cube extends Component {
     constructor() {
         super();
-        this.avatar = "some url!";
+
 
     }
 
     handler = () => {
         alert("it works");
-        alert(this.avatar);
+
     }
 
     render() {
