@@ -10,6 +10,7 @@ class Cube extends Component {
         this.props.removeCube(this.props.index);
     }
 
+
     render() {
         return(
              <div className='Cube' style={this.props.style} onClick={this.handler}>

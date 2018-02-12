@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import Cube from "./Cube";
+import Points from "./Points";
 
 class GameField extends Component {
     constructor() {
         super();
-        this.state = {cubes: []};
+        this.state = {cubes: [], value: 0};
         for(let i = 0; i < 10; i++) {
             this.generateNewCube();
         }
@@ -12,13 +13,16 @@ class GameField extends Component {
        // this.removeCube = this.removeCube.bind(this);
     }
 
+    colors = ['red', 'green', 'blue', 'yellow'];
+
     generateCubeStyle() {
 
-        let colors = ['red', 'green', 'blue', 'yellow'];
+
         let top = Math.floor(Math.random()*450);
         let left = Math.floor(Math.random()*450);
         let size = 50;
-        let color = colors[Math.floor(Math.random()*4)];
+        let color = this.colors[Math.floor(Math.random()*4)];
+
         let cubeStyle = {
             width: size+'px',
             height: size+'px',
@@ -48,25 +52,62 @@ class GameField extends Component {
         for (let i = 0; i < count; i++){
             this.generateNewCube();
         }
-    }
+    };
 
     removeCube = (i) => {
        let newArray = this.state.cubes;
+
+       let value = 0;
+        switch(newArray[i].style.background){
+
+
+            case 'red':  value = 2;
+                break;
+            case 'green': value = 4;
+                break;
+            case 'blue': value = 3;
+                break;
+            case 'yellow': value = 1;
+                break;
+
+        }
+
        newArray.splice(i,1);
-       this.setState({cubes: newArray});
+       this.setState({cubes: newArray, value: value + this.state.value});
        this.randNewCubs();
-    }
+    };
 
     eachCube(item, index){
-     return (
-         <Cube style={item.style} index={index} removeCube={this.removeCube} />
+        let value = 0;
+
+
+        switch(item.style.background){
+
+
+            case 'red':  value = 2;
+                break;
+            case 'green': value = 4;
+                break;
+            case 'blue': value = 3;
+                break;
+            case 'yellow': value = 1;
+                break;
+
+            }
+
+
+        return (
+         <Cube style={item.style} index={index} value={value} removeCube={this.removeCube} />
         );
     }
 
     render() {
         return (
+            <div className='Game'>
+            <Points value={this.state.value}/>
             <div className='GameField'>
                 {this.state.cubes.map(this.eachCube)}
+            </div>
             </div>
         )
 
