@@ -1,21 +1,21 @@
 import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
 
 class Cube extends Component {
     constructor() {
         super();
-
-
+        this.handler = this.handler.bind(this);
     }
-
-    handler = () => {
-        alert("it works");
-
+    handler(){
+        this.props.removeCube(this.props.index);
     }
 
     render() {
         return(
-            (2 > this.props.number)? <div className='Cube' onClick={this.handler}>Cube # {this.props.number}</div>:
-                                        <h1>Нету</h1>
+             <div className='Cube' style={this.props.style} onClick={this.handler}>
+
+                 </div>
+
         )
     }
 }

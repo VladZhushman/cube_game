@@ -27,9 +27,13 @@
   to { transform: rotate(360deg); }
 }
 
-.Cube {
-  width: 100px;
-  height: 100px;
-  background: greenyellow;
 
+.GameField {
+  border: 1px solid black;
+  position: relative;
+  width: 500px;
+  height: 500px;
+}
+.Cube {
+  border: 1px solid black;
 }
