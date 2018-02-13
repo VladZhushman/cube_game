@@ -33,7 +33,73 @@
   position: relative;
   width: 500px;
   height: 500px;
+  top: 100px;
+  left: 30px;
 }
+
 .Cube {
   border: 1px solid black;
 }
+
+.disabled {
+  pointer-events: none;
+}
+
+
+.one {
+  position: absolute;
+  top: 30px;
+  left: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.two {
+  position: absolute;
+  top: 30px;
+  left: 140px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.three {
+  position: absolute;
+  top: 30px;
+  left: 260px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.four {
+  position: absolute;
+  top: 30px;
+  left: 380px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.Points {
+  position: absolute;
+  top: 30px;
+  left: 500px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.five {
+  position: absolute;
+  top: 30px;
+  left: 100px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.Stats {
+  width: 500px;
+  position: absolute;
+  top: 100px;
+  left: 700px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+

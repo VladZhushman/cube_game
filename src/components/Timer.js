@@ -3,15 +3,36 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
-
+import Scores from "./Scores";
+import Info from "./info";
 
 
 
 class Timer extends Component {
     constructor() {
         super();
-        this.state = {time: 60, open: false};
+        this.state = {time: 60, open: false, isEnd: false, users: []};
     }
+
+    addUser = () => {
+
+        let oldUsersList = this.state.users;
+        oldUsersList.push(
+            {
+                name: this.state.textFieldValue,
+                points: this.props.result,
+            }
+        );
+
+        oldUsersList.sort((a, b) => {
+            return b.points - a.points;
+        });
+
+        this.setState({users: oldUsersList});
+
+    };
+
+
 
     increment = () => {
         if(this.state.time !== 0) {
@@ -26,8 +47,23 @@ class Timer extends Component {
 
     handleSubmit = () => {
         this.setState({open: false});
+        //give info into scores and block click for field
+        this.addUser();
+        this.setState({isEnd: true});
+        let elem = document.getElementById('gamefield');
+        elem.className = 'GameField disabled';
 
     };
+
+    handleNewGame = () => {
+      this.props.resetHandler();
+      this.setState({time: 60});
+
+        let elem = document.getElementById('gamefield');
+        elem.className = 'GameField disabled';
+        clearInterval(this.timerId);
+    };
+
 
     handleClose = () => {
         this.setState({open: false});
@@ -40,12 +76,16 @@ class Timer extends Component {
     };
 
     stopTimer = () => {
+        let elem = document.getElementById('gamefield');
+        elem.className = 'GameField disabled';
         clearInterval(this.timerId);
 
     };
 
     startTimer = () => {
         this.timerId = setInterval(this.increment, 1000);
+        let elem = document.getElementById('gamefield');
+        elem.className = 'GameField';
     };
 
     componentWillUnmount() {
@@ -73,13 +113,39 @@ class Timer extends Component {
            return (
                <div className='Timer'>
 
-                   <RaisedButton label="Start" primary={true} onClick={this.startTimer}/>
-                   <RaisedButton label="Stop" primary={true} onClick={this.stopTimer}/>
+                   <div className='one'>
+                       <Info />
+                   </div>
+
+                   <div className='two'>
+                   <RaisedButton
+                       label="New Game"
+                       primary={true}
+                       onClick={this.handleNewGame}
+                   />
+                   </div>
+                   <RaisedButton
+                       label="Start"
+                       primary={true}
+                       onClick={this.startTimer}
+                       className='three'
+                   />
+                   <RaisedButton
+                       label="Stop"
+                       primary={true}
+                       onClick={this.stopTimer}
+                       className='four'
+                   />
+
                    <TextField
                        disabled={true}
                        hintText={str}
                        underlineShow={false}
-                   /><br/>
+                       className='five'
+                   />
+
+                   <Scores users={this.state.users} />
+
 
                    <Dialog
                        title="Dialog With Actions"

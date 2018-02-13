@@ -11,12 +11,14 @@ class GameField extends Component {
             this.generateNewCube();
         }
         this.eachCube = this.eachCube.bind(this);
+        this.generateNewCube = this.generateNewCube.bind(this);
+
        // this.removeCube = this.removeCube.bind(this);
     }
 
     colors = ['red', 'green', 'blue', 'yellow'];
 
-    generateCubeStyle() {
+    generateCubeStyle = () => {
 
 
         let top = Math.floor(Math.random()*450);
@@ -35,9 +37,9 @@ class GameField extends Component {
 
         return cubeStyle;
 
-    }
+    };
 
-    generateNewCube(){
+    generateNewCube =() => {
         let newCubes = this.state.cubes;
         //let index = newCubes.length;
         let newCube = this.generateCubeStyle();
@@ -46,7 +48,7 @@ class GameField extends Component {
             {style: newCube}
         );
         this.setState({cubes: newCubes});
-    }
+    };
 
     randNewCubs = () => {
         let count = Math.floor(Math.random()*3);
@@ -54,6 +56,8 @@ class GameField extends Component {
             this.generateNewCube();
         }
     };
+
+
 
     removeCube = (i) => {
        let newArray = this.state.cubes;
@@ -102,16 +106,33 @@ class GameField extends Component {
         );
     }
 
+
+    resetHandler = () => {
+
+            this.setState({cubes: [], value: 0}, ()=>{
+                for (let i = 0; i < 10; i++) {
+                    this.generateNewCube();
+                }
+
+            });
+
+        };
+
+
+
+
+
+
     render() {
-        return (
-            <div className='Game'>
-            <Points value={this.state.value}/>
-            <Timer result={this.state.value}/>
-            <div className='GameField'>
+        return ( <div className='Game'>
+            <Points value={this.state.value} className='Points'/>
+            <Timer result={this.state.value} resetHandler={this.resetHandler} className='Timer'/>
+
+            <div id='gamefield' className='GameField disabled'>
                 {this.state.cubes.map(this.eachCube)}
             </div>
-            </div>
-        )
+        </div>);
+        ;
 
     }
 }
