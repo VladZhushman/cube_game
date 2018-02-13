@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Cube from "./Cube";
 import Points from "./Points";
+import Timer from "./Timer";
 
 class GameField extends Component {
     constructor() {
@@ -105,6 +106,7 @@ class GameField extends Component {
         return (
             <div className='Game'>
             <Points value={this.state.value}/>
+            <Timer result={this.state.value}/>
             <div className='GameField'>
                 {this.state.cubes.map(this.eachCube)}
             </div>
