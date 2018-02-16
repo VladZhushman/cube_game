@@ -29,7 +29,7 @@ class Scores extends Component {
     render() {
         return (
             <div className="Stats">
-            <Table w>
+            <Table >
                 <TableHeader>
                     <TableRow>
                         <TableHeaderColumn>#</TableHeaderColumn>

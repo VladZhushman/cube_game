@@ -11,7 +11,9 @@ import Info from "./info";
 class Timer extends Component {
     constructor() {
         super();
-        this.state = {time: 60, open: false, isEnd: false, users: []};
+
+        let us = localStorage.users ? JSON.parse(localStorage.users) : [];
+        this.state = {time: 60, open: false, isEnd: false, users: us};
     }
 
     addUser = () => {
@@ -27,6 +29,8 @@ class Timer extends Component {
         oldUsersList.sort((a, b) => {
             return b.points - a.points;
         });
+
+        localStorage['users'] = JSON.stringify(oldUsersList);
 
         this.setState({users: oldUsersList});
 
